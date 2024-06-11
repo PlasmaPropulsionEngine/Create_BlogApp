@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{Base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="sylesheet" href="style.css">
+    <link rel="footerstyle" href="css/footerstyles.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="html" th:href="@{/html/toast.html}">
+    <title>register</title>
+</head>
+<body class="bg">
+	
+    <section>  
+        <div class="box">
+				<!--message alert-->
+						<div id="toast" th:if="${session.msg}" th:classappend="${session.msg.type}"  class="ctoast" >
+	  						<p  class="text-center"   th:text="${session.msg.content}" ></p>
+	  						<th:block th:text="${@removeMessages.removeSessionAttribute()}"></th:block>
+						</div>
+						
+            <div class="formbold-main-wrapper ">
+              <!-- Author: FormBold Team -->
+              <!-- Learn More: https://formbold.com <--></-->
+              <div class="formbold-form-wrapper b">
+				  						<!--th:object comming from DisplayRegisterPage handler-->
+                <form  th:action="@{/register-process}"  method="post" th:object="${user}">
+                  <div class="formbold-form-title">
+                    <h2 class="">Register Here <span ><img th:src="@{/image/tranparent-earth.gif}" width="50px" height="50px" style="border: 1px solid black; border-radius: 150px; shape-margin: 5px;" ></span></h2>
+                   
+                  </div>
+            
+                  <div class="formbold-input-flex">
+                    <div>
+                      <label for="firstname" class="formbold-form-label">
+                        First name *
+                      </label>
+                      <input
+                        type="text"
+                        name="firstname"
+                        id="firstname"
+                        class="formbold-form-input b"
+                       th:value="${user.firstname}"
+                       th:classappend="${#fields.hasErrors('firstname')? 'is-invalid':'' }"
+                       required
+                      />
+                       <div  th:each="e:${#fields.errors('firstname')}" th:text="${e}" id="validationServer03Feedback" class="invalid-feedback">
+     					</div>
+                    </div>
+                    <div>
+                      <label for="lastname" class="formbold-form-label"> Last name </label>
+                      <input
+                        type="text"
+                        name="lastname"
+                        id="lastname"
+                        class="formbold-form-input b"
+                         th:value="${user.lastname}"
+                          th:classappend="${#fields.hasErrors('lastname')? 'is-invalid':'' }"
+                      />
+                       <div  th:each="e:${#fields.errors('lastname')}" th:text="${e}" id="validationServer03Feedback" class="invalid-feedback">
+     					</div>
+                    </div>
+                  </div>
+            
+                  <div class="formbold-input-flex">
+                    <div>
+                      <label for="email" class="formbold-form-label"> Email *</label>
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                          th:value="${user.email}"
+                        class="formbold-form-input b"
+                        th:classappend="${#fields.hasErrors('email')? 'is-invalid':'' }"
+                        required
+                      />
+                       <div  th:each="e:${#fields.errors('email')}" th:text="${e}" id="validationServer03Feedback" class="invalid-feedback">
+     					</div>
+                    </div>
+                    <div>
+                      <label for="password" class="formbold-form-label "> Password *</label>
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        class="formbold-form-input b"
+                        maxlength="12"
+                        minlength="8"
+                        th:classappend="${#fields.hasErrors('password')? 'is-invalid':'' }"
+                        required 
+                        />
+                         <div  th:each="e:${#fields.errors('password')}" th:text="${e}" id="validationServer03Feedback" class="invalid-feedback">
+     					</div>
+                    </div>
+                  </div>
+          
+            
+                  <div class="formbold-checkbox-wrapper">
+                    <label for="supportCheckbox" class="formbold-checkbox-label">
+                      <div class="formbold-relative">
+                        <input
+                          type="checkbox"
+                          id="supportCheckbox"
+                          class="formbold-input-checkbox"
+                         name="agree"
+                        />
+                       
+                        <div class="formbold-checkbox-inner">
+                          <span class="formbold-opacity-0">
+                            <svg
+                              width="11"
+                              height="8"
+                              viewBox="0 0 11 8"
+                              fill="none"
+                              class="formbold-stroke-current"
+                            >
+                              <path
+                                d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
+                                stroke-width="0.4"
+                              ></path>
+                            </svg>
+                          </span>
+                        </div>
+                      </div>
+                      I agree to the defined
+                      <a href="#"> terms, conditions, and policies</a>
+                    </label>
+                  </div>
+            
+                  <button  type="submit"  class="formbold-btn">Register Now</button>
+                  <span>&nbsp;</span>
+                  <a th:href="@{/login}"  style="text-decoration: none;" class="formbold-btn">Login Here</a>
+                </form>
+              </div>
+            </div>
+        
+            <footer class="footer">
+              <div class="waves">
+                <div class="wave" id="wave1"></div>
+                <div class="wave" id="wave2"></div>
+                <div class="wave" id="wave3"></div>
+                <div class="wave" id="wave4"></div>
+              </div>
+              <ul class="social-icon">
+                <li class="social-icon__item"><a class="social-icon__link" href="https://www.facebook.com/">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                  </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://twitter.com/?lang=en">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                  </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://in.linkedin.com/">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                  </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://www.instagram.com/">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                  </a></li>
+              </ul>
+              <ul class="menu">
+                <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">About</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Services</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
+            
+              </ul>
+              <p>&copy;Prootype</p>
+            </footer>
+                  
+          </div>
+        
+	
+ </section>
+
+
+
+
+<script th:src="@{/js/script.js}" type="text/javascript"></script>
+
+
+
+
+
+</body>
+</html>

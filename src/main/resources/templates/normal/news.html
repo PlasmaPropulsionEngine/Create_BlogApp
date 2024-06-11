@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/nbase::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/templatemo-xtra-blog.css" rel="stylesheet">
+	<title>News</title>
+</head>
+<body>
+	<section>	
+
+   <div class="container-fluid">
+        <main class="tm-main">
+            <!-- Search form -->
+            <div class="row tm-row">
+                <div class="col-12">
+                    <form th:action="@{/news/q}"  method="get"  class="form-inline tm-mb-80 tm-search-form">                
+                        <input class="form-control tm-search-input" name="query" type="text" placeholder="Search..." aria-label="Search">
+                        <button class="tm-search-button" type="submit">
+                            <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
+                        </button>                                
+                    </form>
+                </div>                
+            </div>
+
+            <div class="row tm-row" th:each="n ,status:${data.articles}" >
+                <article class="col-8 ">
+                    <hr class="tm-hr-primary">
+                    <a th:href="${n.url}" class="effect-lily tm-post-link tm-pt-60">
+                        <div class="tm-post-link-inner">
+                            <img  th:src="${n.urlToImage}" alt="Image" class="img-fluid">                            
+                        </div>
+                        <span class="position-absolute tm-new-badge"></span>
+                        <h2   th:text="${n.title}" class="tm-pt-30 tm-color-primary tm-post-title">Simple and useful HTML layout</h2>
+                    </a>                     
+                    <p class="tm-pt-30" th:text="${n.description}">
+                        There is a clickable image with beautiful hover effect and active title link for each post item. 
+                        Left side is a sticky menu bar. Right side is a blog content that will scroll up and down.
+                    </p>
+                    <div class="d-flex justify-content-between tm-pt-45">
+                        <p>by <span class="tm-color-primary"th:text=${n.author}>Travel . Events</span></p>
+                        <span class="tm-color-primary" th:text="${n.publishedAt}">June 24, 2020</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <span>36 comments</span>
+                        <span>by Admin Nat</span>
+                    </div>
+                </article>
+                 
+                  
+            </div>
+            <div class="row tm-row tm-mt-100 tm-mb-75">
+                <div class="tm-prev-next-wrapper">
+                    <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled tm-mr-20">Prev</a>
+                    <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Next</a>
+                </div>
+                             
+            </div>            
+           
+        </main>
+        </div>
+				
+	</section>
+  	 <script src="js/jquery.min.js"></script>
+    <script src="js/templatemo-script.js"></script>
+</body>
+</html>

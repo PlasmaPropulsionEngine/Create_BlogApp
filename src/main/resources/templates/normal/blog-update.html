@@ -1,0 +1,119 @@
+	<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/nbase::layout(~{::section})}" >
+<head>
+	<meta charset="UTF-8" />
+	 <link rel="stylesheet" th:href="@{/css/style.css}">
+	<title>Home page</title>
+</head>
+<body class="bg">
+	 <h1>blog-view page</h1> 
+	  
+	 <section>		 
+		 <div class="box-blog text-center">
+			 
+		<form action="#" th:action="@{/user/process-update}" enctype="multipart/form-data"  method="post" th:object="${blog}">
+	<div class="mb-3">
+		<!--ID-->	
+		<input type="hidden" th:value="${blog.Bid}" name="Bid">
+  <label for="exampleFormControlInput1" class="form-label">Title:</label>
+  <input type="text" th:value="${blog.title}" name="title" class=" title form-control" id="exampleFormControlInput1" placeholder="Blog Title" required>
+</div>
+<div class="mb-3">
+	<label for="file-upload" class="file-label">Change Image</label>
+	<input type="file" id="file-upload"   name="img" >
+	<div class="container mt-3 text-center ">
+	<img   style="height: 150px;width: 150px;" class="my-profile-picture" th:src="@{'/image/'}+${blog.image}" >
+	</div>
+</div>
+<div class="mb-3">
+	
+  <label for="exampleFormControlTextarea1" class="form-label">Description:</label>
+  <textarea class="form-control" th:text="${blog.description}" name="Description" id="exampleFormControlTextarea1" rows="10" required>	 
+  </textarea>
+</div>
+
+<div >
+<label>Public</label>
+<input type="radio" name="blogtype"   th:checked="${blog.blogtype.contains('public') ? 'true' : 'false'}"  th:value="public" >
+</div>
+&nbsp;
+<div>
+<label>Private:</label>
+<input type="radio" name="blogtype" th:checked="${blog.blogtype.contains('private') ? 'true' : 'false'}" th:value="private">	
+	
+</div>
+	
+
+&nbsp; &nbsp;
+	<button  type="submit" > Update</button>&nbsp; &nbsp; <button type="reset">Reset</button> 		  
+	  </form>
+	
+		  	 
+			 
+			 </div>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			 
+			 
+			 
+			 
+			 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			 
+		
+		 
+		    <footer class="footer">
+              <div class="waves">
+                <div class="wave" id="wave1"></div>
+                <div class="wave" id="wave2"></div>
+                <div class="wave" id="wave3"></div>
+                <div class="wave" id="wave4"></div>
+              </div>
+              <ul class="social-icon">
+                <li class="social-icon__item"><a class="social-icon__link" href="https://www.facebook.com/">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                  </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://twitter.com/?lang=en">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                  </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://in.linkedin.com/">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                  </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://www.instagram.com/">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                  </a></li>
+              </ul>
+              <ul class="menu">
+                <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">About</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Services</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
+            
+              </ul>
+              <p>&copy;Prootype</p>
+            </footer>
+	 </section>
+	 	 
+	 <a th:href="@{/register}">register here</a>
+	 <a th:href="@{/login}">Login here </a>
+</body>
+</html>

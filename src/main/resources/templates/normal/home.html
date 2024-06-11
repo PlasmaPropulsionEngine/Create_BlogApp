@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/nbase::layout(~{::section})}" >
+<head>
+	<meta charset="UTF-8" />
+	 <link rel="stylesheet" th:href="@{/css/style.css}">
+	<title>Home page</title>
+</head>
+<body class="bg">
+	 <h1>HOme page</h1>
+  
+	 <section>		
+		 <div class="container-fluid">
+			  	 <main class="tm-main">
+			  	
+	      <div class="row tm-row" th:each="n ,status:${blog}" >
+                <article class="col-8 ">
+                    <hr class="tm-hr-primary">
+                    <a  class="effect-lily tm-post-link tm-pt-60">
+                        <div class="tm-post-link-inner">
+                            <img  th:src="@{'/image/'}+${n.image}" alt="Image" class="img-fluid">                            
+                        </div>
+                        <span class="position-absolute tm-new-badge"></span>
+                        <h2   th:text="${n.title}" class="tm-pt-30 tm-color-primary tm-post-title">Simple and useful HTML layout</h2>
+                    </a>                     
+                    <p class="tm-pt-30" th:text="${n.description}">
+                        There is a clickable image with beautiful hover effect and active title link for each post item. 
+                        Left side is a sticky menu bar. Right side is a blog content that will scroll up and down.
+                    </p>
+                    <div class="d-flex justify-content-between tm-pt-45">
+                        <p>by <span class="tm-color-primary"th:text=${n.users.firstname}>Travel . Events</span></p>
+                        <span class="tm-color-primary" >June 24, 2020</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <span>36 comments</span>
+                        <span>by Admin Nat</span>
+                    </div>
+                </article>
+                 
+                  
+            </div>	
+             </main> 
+		 </div>
+		 
+		 	 
+		 
+		    <footer class="footer">
+              <div class="waves">
+                <div class="wave" id="wave1"></div>
+                <div class="wave" id="wave2"></div>
+                <div class="wave" id="wave3"></div>
+                <div class="wave" id="wave4"></div>
+              </div>
+              <ul class="social-icon">
+                <li class="social-icon__item"><a class="social-icon__link" href="https://www.facebook.com/">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                  </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://twitter.com/?lang=en">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                  </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://in.linkedin.com/">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                  </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://www.instagram.com/">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                  </a></li>
+              </ul>
+              <ul class="menu">
+                <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">About</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Services</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
+            
+              </ul>
+              <p>&copy;Prootype</p>
+            </footer>
+	 </section>
+	 	 
+	 <a th:href="@{/register}">register here</a>
+	 <a th:href="@{/login}">Login here </a>
+</body>
+</html>

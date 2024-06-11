@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/nbase::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title th:${title}>dashboard</title>
+</head>
+<body>
+
+
+<section>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	
+	<!--message alert-->
+	<div id="toast" th:if="${session.msg}" th:classappend="${session.msg.type}"  class="ctoast" >
+	 <p  class="text-center"   th:text="${session.msg.content}" ></p>
+	 <th:block th:text="${@removeMessages.removeSessionAttribute()}"></th:block>
+	</div>
+	<!--message alert-->
+
+	
+	<!--search-->
+	<div class="">
+	<div class="search " role="search">
+	<form  class="" th:action="@{/user/search}" method="post"> 
+	<h4  style="color: rgb(192, 192, 192);">Get Weather Info</h4>
+	<input type="text" class=""  name="query" placeholder="Search city/country/regin" minlength="3" required> 
+	 <button class="btn btn-success search-btn" type="submit">Search</button> &nbsp;
+	</form>	
+	</div>
+	
+	<!--weather box-->
+	<div th:if="${name}" class="weather-box wtoast">
+	 <div class="">
+          <!-- Report-->
+          <div class="">
+            <div class="">
+              <!-- weather parameters-->
+              <img th:src="${icon}" alt="">
+              <p th:text="${temp}"></p>
+              <p th:text="${name}"></p>   
+              </div>
+              <!-- Details-->
+              <div class="">
+                <h6></h6>
+                <p class=""></p>
+              </div>
+            </div>
+           </div>   
+	 </div>
+			
+	<div style="margin-top: 25px;"    class="blog-box" >
+<div class="accordion" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+  		<path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+	</svg> Create Blog Here:
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+      <div class="accordion-body">
+  <!--blog form-->    
+      <form th:action="@{/user/create-blog}" enctype="multipart/form-data"  method="post">
+	<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Title:</label>
+  <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Blog Title" required>
+</div>
+<div class="mb-3">
+	<label for="file-upload" class="file-label"> Add Image</label>
+	<input type="file" id="file-upload"   name="img" >
+	
+</div>
+<div class="mb-3">
+	
+  <label for="exampleFormControlTextarea1" class="form-label">Description:</label>
+  <textarea  id="display" ondrop="drop(event)" ondragover="allow(event)"  class="form-control" name="Description" rows="10" required="true">	 
+  </textarea>
+</div>
+<label>Public</label>
+<input type="radio" name="blogtype" value="public" required>
+&nbsp;
+<label>Private:</label>
+<input type="radio" name="blogtype" value="private">
+&nbsp; &nbsp;
+	<button type="submit" class="btn btn-success">Create</button>&nbsp; &nbsp; <button type="reset" class="btn btn-light">Reset</button> 		  
+	  </form>
+ 
+      
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+       
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+      <div class="accordion-body">
+        <strong></strong>  <code></code>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+    
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+      <div class="accordion-body">
+        <strong></strong>  <code></code>
+      </div>
+    </div>
+  </div>
+</div>
+		
+	</div>
+	
+	
+	
+	</div>
+
+	<!--search end-->
+
+	
+	
+	
+
+  <div class="right-box">
+	 
+	<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+     Profile
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body"> 
+		  <div class="profilestyle">
+				<img src="">
+			 <p >FirstName: <span th:text="${user.firstname}"></span></p>
+			  <p >LastName: <span th:text="${user.lastname}"></span></p> 
+			   <p >Email-Id: <span th:text="${user.email}"></span></p>  
+				<button class="btn btn-secondary" ><a style="text-decoration: none;color: rgb(255, 255, 255);  "  th:href="@{/logout}">Logout</a></button> &nbsp; &nbsp; <button class="btn btn-warning" ><a style="text-decoration: none;" th:href="@{/user/index/{user.id}}">Edit</a></button>  
+			 </div> 
+	  </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+     <a th:href="@{/user/view-blog}" style="text-decoration: none;" class="text-decoration:none">My Blogs</a>
+      </button>
+    </h2>	
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+		  <div class="" th:if="${blog}" th:each="n,status:${blog}"> 
+			 <ul >
+			<a class="title" style="text-decoration: none; text-transform:uppercase"  th:href="@{'/user/blog-view/'+${n.bid}}"> <li  th:text="${status.index+1}+'. '+${n.title}"></li></a>
+			
+			<form th:action="@{'/user/blog-update/'+${n.bid}}" method="post">
+				<button  class="btn btn-dark" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+  				<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+  				<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+				</svg>  Update</buttonstyle="margin-right: 16px">	
+			</form> 
+						
+			 <button  style="margin-top: 10px " class="btn btn-danger" href="#" th:onclick="|deteteBlog(${n.Bid})|">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+  			<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+  			<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+			</svg> Delete</button> 
+			
+		  </ul> 
+		  </div>
+		  
+	  </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+ 
+      </button>
+    </h2>
+    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body"></div><code></code> </div>
+    </div>
+  </div>
+</div>
+	    
+          </div>
+    
+ 	<!--footer-->
+ 	<div class="dashboard-footer">
+		  <footer class="footer">
+              <div class="waves">
+                <div class="wave" id="wave1"></div>
+                <div class="wave" id="wave2"></div>
+                <div class="wave" id="wave3"></div>
+                <div class="wave" id="wave4"></div>
+              </div>
+              <ul class="social-icon">
+                <li class="social-icon__item"><a class="social-icon__link" href="https://www.facebook.com/">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                  </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://twitter.com/?lang=en">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                  </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://in.linkedin.com/">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                  </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://www.instagram.com/">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                  </a></li>
+              </ul>
+              <ul class="menu">
+                <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">About</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Services</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
+            
+              </ul>
+              <p>&copy;Prootype</p>
+            </footer>
+	 </div>
+ 		
+	
+
+</section>
+
+</body>
+</html>
